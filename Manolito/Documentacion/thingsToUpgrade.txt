@@ -1,0 +1,2 @@
+1- optimizar  consulta_login para que con cirteria te devuelva ususario+rol
+2- cambiar accesoapp y primerlogin a tipo boolean para optimizar uso de spring security
