@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:icecore="http://www.icefaces.org/icefaces/core"
+	xmlns:ace="http://www.icefaces.org/icefaces/components">
+
+<h:head>
+
+</h:head>
+<h:body>
+
+	<center>
+		<a href="Administrador2.xhtml">Gestionar Usuarios</a>
+	</center>
+
+	<h:form id="formu_tarea">
+
+		<h:panelGrid id="panel_articulo" columns="4">
+
+
+			<!-- 1º FILA DEL FORMULARIO -->
+			<h:outputText id="eti_cod" value="Código: " />
+			<h:inputText id="cod"
+				value="#{administrador_bean2.tarea.codigo_tarea}"
+				disabled="#{administrador_bean2.campo_cod}"
+				validatorMessage="Solo admite numeros y como máximo 5 cifras.">
+				<f:convertNumber type="number" maxIntegerDigits="5"
+					integerOnly="true" />
+			</h:inputText>
+			<h:message for="cod" style="color:red" />
+
+			<!-- 2º FILA DEL FORMULARIO -->
+			<h:outputText id="eti_name" value="Nombre tarea: " />
+			<h:inputText id="name"
+				value="#{administrador_bean2.tarea.nombre_tarea}"
+				converterMessage="Máximo 100 caracteres.">
+				<f:validateLength maximum="100" />
+			</h:inputText>
+			<h:message for="name" style="color:red" />
+
+			<!-- 3º FILA DEL FORMULARIO -->
+			<h:outputText id="eti_desc" value="Descripcion: " />
+			<h:inputText id="desc" value="#{administrador_bean2.tarea.desc}"
+				validatorMessage="El maximo de caracteres permitidos son 200.">
+				<f:validateLength maximum="200" />
+			</h:inputText>
+			<h:message for="desc" style="color:red" />
+
+			<!-- 4º FILA DEL FORMULARIO -->
+			<h:outputText id="eti_estado" value="Estado: " />
+			<h:selectOneRadio value="#{administrador_bean2.tarea.estado}">
+				<f:selectItem itemLabel="Deshabilitada" itemValue="0" />
+				<f:selectItem itemLabel="Habilitada" itemValue="1" />
+			</h:selectOneRadio>
+			<h:message for="eti_estado" style="color:red" />
+
+		</h:panelGrid>
+		<h:panelGrid id="panel_botones" columns="5">
+			<h:commandButton id="boton_alta" value="Alta"
+				disabled="#{administrador_bean2.bot_alt}"
+				actionListener="#{administrador_bean2.alta}" />
+			<h:commandButton id="boton_baja" value="Baja"
+				disabled="#{administrador_bean2.bot_bm}"
+				actionListener="#{administrador_bean2.baja}" />
+			<h:commandButton id="boton_modificacion" value="Modificacion"
+				disabled="#{administrador_bean2.bot_bm}"
+				actionListener="#{administrador_bean2.modificacion}" />
+			<h:commandButton id="boton_consulta" value="Consulta"
+				actionListener="#{administrador_bean2.consulta}" />
+			<h:commandButton id="boton_clear" value="Clear"
+				actionListener="#{administrador_bean2.clear}">
+				<f:ajax execute="@this" render="formu_tarea" />
+			</h:commandButton>
+
+		</h:panelGrid>
+
+		<ace:growlMessages id="info" style="background-color:green"
+			displayDuration="5000" />
+		<ace:growlMessages id="error" style="background-color:red"
+			displayDuration="5000" />
+
+	</h:form>
+	<br />
+	<br />
+	<h:form id="tabla_tareas">
+		<ace:dataTable id="tabla" value="#{administrador_bean2.lista_tareas}"
+			var="tarea" rows="#{administrador_bean2.numero_filas}"
+			paginator="true" paginatorPosition="bottom">
+
+			<ace:column id="col_cod" headerText="Codigo"
+				filterBy="#{tarea.codigo_tarea}">
+				<h:outputText id="codigo" value="#{tarea.codigo_tarea}" />
+			</ace:column>
+
+			<ace:column id="col_nombre" headerText="Tarea"
+				filterBy="#{tarea.nombre_tarea}">
+				<h:outputText id="tarea" value="#{tarea.nombre_tarea}" />
+			</ace:column>
+
+			<ace:column headerText="Descripción" filterBy="#{tarea.desc}">
+				<h:outputText id="desc" value="#{tarea.desc}" />
+			</ace:column>
+
+			<ace:column headerText="Estado" filterBy="#{tarea.estado}">
+				<h:outputText id="estado" value="#{tarea.estado}">
+				</h:outputText>
+			</ace:column>
+
+		</ace:dataTable>
+
+		<h:commandButton id="boton_tabla" value="refresh table"
+			actionListener="#{administrador_bean2.refresh_tabla}">
+			<f:ajax execute="@this" render="tabla" />
+		</h:commandButton>
+
+	</h:form>
+
+<br/><br/>
+	<form action="${request.contextPath}/logout" method="post">
+		<input type="submit" value="Cerrar Sesión" />
+	</form>
+
+</h:body>
+
+</html>
