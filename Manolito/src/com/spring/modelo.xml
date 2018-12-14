@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="iso-8859-15"?>
+<beans default-autowire="byName" default-lazy-init="true"
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+	<!-- COMPONENTE DE LECTURA DE PROPERTIES -->
+	<bean id="gestor_properties"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<!-- RUTA Y NOMBRE DE PROPERTIES A LEER -->
+		<property name="location"
+
+			value="classpath:com/spring/datos-conexion.properties" />
+	</bean>
+
+	<!-- ************ ZONA DE ACCESO A LA BASE DE DATOS ************ -->
+	<!-- CONEXION A LA BASE DE DATOS -->
+
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+		<property name="configLocation"
+			value="classpath:com/atos/hibernate/hibernate.cfg.xml">
+		</property>
+	</bean>
+
+
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate5.HibernateTransactionManager" />
+
+
+	<tx:annotation-driven
+		transaction-manager="transactionManager" />
+
+	<!-- **** DATASOURCE REQUERIDO POR TRANSACTION MANAGER **** -->
+	<bean id="dataSource"
+		class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="${spring.datasource.driver}" />
+		<property name="url" value="${spring.datasource.url}" />
+
+		<property name="username" value="${spring.datasource.nombre}" />
+		<property name="password" value="${spring.datasource.clave}" />
+	</bean>
+	
+	
+
+	<!-- PAQUETES CON ANOTACIONES PARA SPRING PARA LA GESTION DEL MODELO -->
+	
+	
+		<context:component-scan
+		base-package="com.atos.hibernate.modelo" />
+		
+		<context:component-scan
+		base-package="com.atos.hibernate.dao" />
+		
+		<context:component-scan
+		base-package="com.atos.hibernate" />
+		
+		<context:component-scan
+		base-package="com.atos.dao_ext" />
+		
+		<context:component-scan
+		base-package="com.atos.util" />
+		
+		<context:component-scan
+		base-package="com.atos.dao" />
+		<context:component-scan
+		base-package="com.atos.managedBean" />
+		
+		<context:component-scan
+		base-package="com.atos.springSecurity" />
+		
+		
+		
+	<!--   <beans>
+    <context:annotation-config/>
+    <bean class="com.atos.springSecurity.SecurityConfig"/>
+	 </beans> -->
+
+
+
+</beans>
+
