@@ -20,11 +20,8 @@ import com.atos.hibernate.modelo.IGestion_Usuarios;
 
 
 @Service("userDetailsService")
-public class UserDetails implements UserDetailsService, Serializable {
+public class UserDetails implements UserDetailsService {
 
-
-	private static final long serialVersionUID = 1L;
-	
 	User user;
 
 	@ManagedProperty("#{gestion_usuarios}")
@@ -35,7 +32,6 @@ public class UserDetails implements UserDetailsService, Serializable {
 
 	public org.springframework.security.core.userdetails.UserDetails loadUserByUsername(String username)
 			throws UsernameNotFoundException {
-		
 		
 		Usuarios usu = gestion_usuarios.consultar_conRol(username);
 
@@ -60,8 +56,6 @@ public class UserDetails implements UserDetailsService, Serializable {
 		}
 		
 		return user;
-		
-	
 	}
 
 	public IGestion_Usuarios getGestion_usuarios() {
@@ -71,7 +65,4 @@ public class UserDetails implements UserDetailsService, Serializable {
 	public void setGestion_usuarios(IGestion_Usuarios gestion_usuarios) {
 		this.gestion_usuarios = gestion_usuarios;
 	}
-
-	
-	
 }

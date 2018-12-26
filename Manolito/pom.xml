@@ -1,15 +1,18 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>Manolito</groupId>
-  <artifactId>Manolito</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <packaging>war</packaging>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>Manolito</groupId>
+	<artifactId>Manolito</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
 
 	<!-- VARIABLES PARA LAS VERSIONES -->
 	<properties>
 		<version-hibernate>5.3.6.Final</version-hibernate>
 		<version-datasource>1.4</version-datasource>
-
+		<primefaces.version>6.2</primefaces.version>
+		<primefaces-extensions.version>6.2.8</primefaces-extensions.version>
 	</properties>
 	<repositories>
 		<!-- ... possibly other repository elements ... -->
@@ -22,8 +25,12 @@
 			<id>codelds</id>
 			<url>https://code.lds.org/nexus/content/groups/main-repo</url>
 		</repository>
+		<repository>
+			<id>prime-repo</id>
+			<name>Prime Repo</name>
+			<url>http://repository.primefaces.org</url>
+		</repository>
 	</repositories>
-
 
 	<dependencies>
 		<!-- ... Spring security ... -->
@@ -48,8 +55,7 @@
 			<artifactId>spring-webmvc</artifactId>
 			<version>5.0.7.RELEASE</version>
 		</dependency>
-
-		<!-- ... Spring security fin ... -->
+		<!-- Spring security fin -->
 
 		<!-- spring -->
 		<dependency>
@@ -82,9 +88,7 @@
 			<artifactId>javax.el-api</artifactId>
 			<version>3.0.0</version>
 		</dependency>
-
 		<!-- spring fin -->
-
 
 		<!-- Servlet API -->
 		<dependency>
@@ -93,8 +97,6 @@
 			<version>4.0.1</version>
 			<scope>provided</scope>
 		</dependency>
-
-
 
 		<!-- DRIVER MYSQL -->
 		<dependency>
@@ -167,18 +169,27 @@
 			<version>4.2.0</version>
 		</dependency>
 
+		<!-- PRIMOFACES -->
+		<dependency>
+			<groupId>org.primefaces</groupId>
+			<artifactId>primefaces</artifactId>
+			<version>${primefaces.version}</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.primefaces.extensions/primefaces-extensions -->
+		<dependency>
+			<groupId>org.primefaces.extensions</groupId>
+			<artifactId>primefaces-extensions</artifactId>
+			<version>${primefaces-extensions.version}</version>
+		</dependency>
+
 		<!-- JSP -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>jsp-api</artifactId>
 			<version>2.0</version>
 		</dependency>
-		
-		
+
 	</dependencies>
-
-
-
 
 	<build>
 		<sourceDirectory>src</sourceDirectory>

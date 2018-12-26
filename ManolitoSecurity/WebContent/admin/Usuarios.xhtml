@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:icecore="http://www.icefaces.org/icefaces/core"
+	xmlns:ace="http://www.icefaces.org/icefaces/components"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	style="background-color: #3f90d0">
+<ui:param name="title" value="#{msgs['example.ace.menuBar.title']}" />
+<ui:param name="description"
+	value="#{msgs['example.ace.menuBar.description']}" />
+
+<h:head></h:head>
+
+<h:body>
+	<!-- FORMULARIO DE TAREAS-->
+	<h:form id="formu_usuarios">
+
+		<ace:dialog id="dialogUsuarios" binding="#{dialogUsuarios}"
+			header="Usuarios" closable="false" modal="false" draggable="false"
+			showEffect="explode" hideEffect="puff" width="400"
+			visible="#{usuarios_bean.visible}">
+
+			<!-- CONTENEDOR DE LOS COMPONENTES -->
+			<h:panelGrid id="panel_formuUsuarios" columns="1"
+				style="margin: 0 auto; text-align: center;">
+				<!-- COMPONENTES DEL FORMULARIO -->
+				<ace:textEntry id="username" value="#{usuarios_bean.usuario.das}"
+					label="DAS" labelPosition="top" required="true"
+					requiredIndicator="*"
+					validatorMessage="Usuario: tamaño máximo: 15 caracteres. Mínimo: 3.">
+					<f:validateLength minimum="3" maximum="15" />
+				</ace:textEntry>
+				<ace:textEntry id="nombre" value="#{usuarios_bean.usuario.nombre}"
+					label="Nombre" labelPosition="top" required="true"
+					requiredIndicator="*"
+					validatorMessage="Nombre: tamaño máximo: 20 caracteres. Mínimo: 3.">
+					<f:validateLength minimum="3" maximum="20" />
+				</ace:textEntry>
+
+				<ace:textEntry id="apellido"
+					value="#{usuarios_bean.usuario.apellido}" label="Apellido"
+					labelPosition="top" required="true" requiredIndicator="*"
+					validatorMessage="Apellido: tamaño máximo: 20 caracteres. Mínimo: 3.">
+					<f:validateLength minimum="3" maximum="20" />
+				</ace:textEntry>
+				<ace:textEntry id="estado" value="#{usuarios_bean.usuario.estado}"
+					label="Estado" labelPosition="top" required="true"
+					requiredIndicator="*" validatorMessage="Estado: activo/no activo.">
+				</ace:textEntry>
+
+				<ace:textEntry id="inicio" value="#{usuarios_bean.usuario.inicio}"
+					label="Inicio" labelPosition="top" required="true"
+					requiredIndicator="*" validatorMessage="Inicio: 1 ó 0.">
+				</ace:textEntry>
+
+				<ace:simpleSelectOneMenu id="selectRol"
+					value="#{usuarios_bean.codigoRol}"
+					valueChangeListener="#{usuarios_bean.rolChange}"
+					label="Select province:" labelPosition="top">
+					<f:selectItem itemValue="" itemLabel="Seleccione rol" />
+					<f:selectItems value="#{usuarios_bean.listaRoles}" var="listaRoles"
+						itemValue="#{listaRoles.codigoRol}"
+						itemLabel="#{listaRoles.nombreRol}" />
+					<ace:ajax />
+				</ace:simpleSelectOneMenu>
+
+			</h:panelGrid>
+
+			<h:panelGrid id="panel_formuBotonesUsuarios" columns="3"
+				style="margin: 0 auto; text-align: center;">
+
+				<ace:pushButton id="botonAlta" value="Alta"
+					actionListener="#{usuarios_bean.alta_Usuario}" />
+
+				<ace:pushButton id="botonBaja" value="Baja"
+					actionListener="#{usuarios_bean.baja_Usuario}" />
+
+				<ace:pushButton id="botonModificar" value="Modificación"
+					actionListener="#{usuarios_bean.modificacion_Usuario}" />
+
+				<ace:pushButton id="botonVolver" value="Volver"
+					onclick="window.history.back();" />
+			</h:panelGrid>
+
+		</ace:dialog>
+	</h:form>
+</h:body>
+
+</html>

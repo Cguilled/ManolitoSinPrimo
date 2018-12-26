@@ -5,7 +5,8 @@
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:icecore="http://www.icefaces.org/icefaces/core"
-	xmlns:ace="http://www.icefaces.org/icefaces/components">
+	xmlns:ace="http://www.icefaces.org/icefaces/components"
+	xmlns:p="http://primefaces.org/ui">
 <h:head>
 </h:head>
 <h:body>
@@ -14,24 +15,37 @@
 
 	<form action="${request.contextPath}/login" method="post">
 
-		<ace:textEntry label="DAS: " name="das" required="true"
+		<!-- <ace:textEntry label="DAS: " name="das" required="true"
 			labelPosition="left"
 			validatorMessage="El DAS no cumple los requisitos.">
 			<f:validateRegex pattern="^[Mm]\d{6}" />
-		</ace:textEntry>
+		</ace:textEntry> -->
+
+		<p:inputText label="DAS: " name="das" required="true"
+			labelPosition="left"
+			validatorMessage="El DAS no cumple los requisitos.">
+			<f:validateRegex pattern="^[Mm]\d{6}" />
+		</p:inputText>
 		<br /> <br />
 
-		<ace:textEntry label="Contraseña: " secret="true" name="password"
+		<!-- <ace:textEntry label="Contraseña: " secret="true" name="password"
 			required="true" labelPosition="left"
 			validatorMessage="La contraseña tiene que tener mínimo 5 caractéres">
 			<f:validateLength minimum="5" />
-		</ace:textEntry>
+		</ace:textEntry> -->
+		
+		<p:inputText label="Contraseña: " secret="true" name="password"
+			required="true" labelPosition="left"
+			validatorMessage="La contraseña tiene que tener mínimo 5 caractéres">
+			<f:validateLength minimum="5" />
+		</p:inputText>
 		<br /> <br />
-		<h:commandButton type="submit" value="Acceder" />
+		
+		<p:commandButton type="submit" value="Acceder" />
 		<input type="hidden" name="${_csrf.parameterName}"
 			value="${_csrf.token}" />
 
-		<ace:growlMessages globalOnly="true" displayDuration="5000" />
+		<p:growl globalOnly="true" displayDuration="5000" />
 	</form>
 
 </h:body>

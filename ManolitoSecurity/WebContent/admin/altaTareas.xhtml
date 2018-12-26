@@ -1,0 +1,148 @@
+<!-- <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:icecore="http://www.icefaces.org/icefaces/core"
+	xmlns:ace="http://www.icefaces.org/icefaces/components"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	style="background-color: #3f90d0">
+<ui:param name="title" value="#{msgs['example.ace.menuBar.title']}" />
+<ui:param name="description"
+	value="#{msgs['example.ace.menuBar.description']}" />
+
+<h:head></h:head>
+
+<h:body>
+	FORMULARIO DE TAREAS
+	<h:form id="formu_tareas">
+
+		<ace:dialog id="dialogTareas" binding="#{dialogTareas}"
+			header="Tareas" closable="false" modal="false" draggable="false"
+			showEffect="explode" hideEffect="puff" width="400"
+			visible="#{tareas_bean.visible}">
+
+			CONTENEDOR DE LOS COMPONENTES
+			<h:panelGrid id="panel_formuTareas" columns="1"
+				style="margin: 0 auto; text-align: center;">
+				COMPONENTES DEL FORMULARIO
+				<ace:textEntry id="nombre_tarea"
+					value="#{tareas_bean.tarea.nombre_Tarea}" label="Nombre"
+					labelPosition="top"
+					validatorMessage="Nombre: tamaño máximo: 100 caracteres. Mínimo: 3.">
+					<f:validateLength minimum="3" maximum="100" />
+				</ace:textEntry>
+
+				<ace:textAreaEntry id="descripcion_tarea"
+					value="#{tareas_bean.tarea.descripcion_Tarea}" label="Descripción"
+					labelPosition="top"
+					validatorMessage="Descripción_Tareas: tamaño máximo: 2000 caracteres.">
+					<f:validateLength maximum="2000" />
+					<ace:ajax render="@this comment1Output comment1Msg" />
+				</ace:textAreaEntry>
+
+				<ace:checkboxButton id="checkBoxEstado"
+					value="#{tareas_bean.tarea.estado}">
+					<ace:ajax execute="@this" event="activate" render="valueEstado" />
+				</ace:checkboxButton>
+				<h:outputText id="valueEstado" value="#{tareas_bean.checkBoxValue}"
+					style="font-weight: bold;" />
+
+			</h:panelGrid>
+
+			<h:panelGrid id="panel_formuBotonesTareas" columns="5"
+				style="margin: 0 auto; text-align: center;">
+
+				<ace:pushButton id="botonAlta" value="Alta"
+					actionListener="#{tareas_bean.alta_Tarea}" />
+
+				<ace:pushButton id="botonAdministrar" value="Administrar"
+					onclick="window.location.href='WebContent/admin/adminTareas.xhtml'" />
+
+				<ace:pushButton id="botonVolver" value="Volver"
+					onclick="window.history.back();" />
+
+			</h:panelGrid>
+
+		</ace:dialog>
+	</h:form>
+
+</h:body>
+
+</html> -->
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:icecore="http://www.icefaces.org/icefaces/core"
+	xmlns:ace="http://www.icefaces.org/icefaces/components"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	style="background-color: #3f90d0">
+<ui:param name="title" value="#{msgs['example.ace.menuBar.title']}" />
+<ui:param name="description"
+	value="#{msgs['example.ace.menuBar.description']}" />
+
+<h:head></h:head>
+
+<h:body>
+	<!-- FORMULARIO DE TAREAS-->
+	<h:form id="formu_tareas">
+
+		<ace:dialog id="dialogTareas" binding="#{dialogTareas}"
+			header="Tareas" closable="false" modal="false" draggable="false"
+			showEffect="explode" hideEffect="puff" width="400"
+			visible="#{tareas_bean.visible}">
+
+			<!-- CONTENEDOR DE LOS COMPONENTES -->
+			<h:panelGrid id="panel_formuTareas" columns="1"
+				style="margin: 0 auto; text-align: center;">
+				<!-- COMPONENTES DEL FORMULARIO -->
+				<ace:textEntry id="nombre_tarea"
+					value="#{tareas_bean.tarea.nombre_Tarea}" label="Nombre"
+					labelPosition="top"
+					validatorMessage="Nombre: tamaño máximo: 100 caracteres. Mínimo: 3.">
+					<f:validateLength minimum="3" maximum="100" />
+				</ace:textEntry>
+
+				<ace:textAreaEntry id="descripcion_tarea"
+					value="#{tareas_bean.tarea.descripcion_Tarea}" label="Descripción"
+					labelPosition="top"
+					validatorMessage="Descripción_Tareas: tamaño máximo: 2000 caracteres.">
+					<f:validateLength maximum="2000" />
+					<ace:ajax render="@this comment1Output comment1Msg" />
+				</ace:textAreaEntry>
+
+				<ace:checkboxButton id="checkBoxEstado"
+					value="#{tareas_bean.tarea.estado}">
+					<ace:ajax execute="@this" event="activate" render="valueEstado" />
+				</ace:checkboxButton>
+				<h:outputText id="valueEstado" value="#{tareas_bean.checkBoxValue}"
+					style="font-weight: bold;" />
+
+			</h:panelGrid>
+
+			<h:panelGrid id="panel_formuBotonesTareas" columns="3"
+				style="margin: 0 auto; text-align: center;">
+
+				<ace:pushButton id="botonAlta" value="Alta"
+					actionListener="#{tareas_bean.alta_Tarea}" />
+
+				<ace:pushButton id="botonVolver" value="Volver"
+					onclick="window.history.back();" />
+
+			</h:panelGrid>
+
+		</ace:dialog>
+	</h:form>
+
+</h:body>
+
+</html>

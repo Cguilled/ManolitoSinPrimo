@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:icecore="http://www.icefaces.org/icefaces/core"
+	xmlns:ace="http://www.icefaces.org/icefaces/components"
+	style="background-color: #3f90d0">
+<ui:param name="title" value="#{msgs['example.ace.dialog.title']}" />
+<ui:param name="description"
+	value="#{msgs['example.ace.dialog.description']}" />
+
+<h:head>
+</h:head>
+
+<h:body>
+
+	<h:form>
+		<!-- Mensajes de validacion en login... estamos en ello -->
+		<ace:growlMessages id="mensajesLogin"
+			autoHide="#{mensajes_bean.autoHide}" for="@inView"
+			closeAll="#{mensajes_bean.closeAll}"
+			maxVisibleMessages="#{mensajes_bean.maxVisibleMessages}"
+			position="#{mensajes_bean.position}" header="#{mensajes_bean.header}"
+			displayDuration="#{mensajes_bean.displayDuration}" />
+	</h:form>
+
+	<!-- FORMULARIO DE LA VISTA -->
+	<form id="formu_login" action="${request.contextPath}/doLogin"
+		method="post">
+
+		<ace:dialog id="dialogLogin" binding="#{dialogLogin}"
+			header="Iniciar sesión" closable="false" modal="true"
+			draggable="false" showEffect="explode" hideEffect="puff" width="400"
+			visible="#{login_bean.visible}">
+
+			<!-- CONTENEDOR DE LOS COMPONENTES -->
+			<h:panelGrid id="panel_formu" columns="1"
+				style="margin: 0 auto; text-align: center;">
+				<!-- COMPONENTES DEL FORMULARIO -->
+				<ace:textEntry name="username" label="Usuario" labelPosition="top"
+					required="true" requiredIndicator="*">
+					<!-- validatorMessage="Usuario: tamaño incorrecto.">
+					<f:validateLength minimum="3" maximum="15" /> -->
+				</ace:textEntry>
+
+				<ace:textEntry name="password" label="Contraseña"
+					labelPosition="top" required="true" secret="true"
+					requiredIndicator="*" indicatorPosition="right">
+					<!-- validatorMessage="Contraseña: tamaño incorrecto.">
+					<f:validateLength minimum="3" maximum="10" /> -->
+				</ace:textEntry>
+
+				<h:commandButton name="botonComprobar" value="Iniciar sesión" />
+				<!-- actionListener="#{login_bean.login_check}" -->
+				<!-- action="#{login_bean.siguiente_pagina}" -->
+
+			</h:panelGrid>
+
+		</ace:dialog>
+
+	</form>
+</h:body>
+</html>

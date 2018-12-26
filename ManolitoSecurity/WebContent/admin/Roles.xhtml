@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:icecore="http://www.icefaces.org/icefaces/core"
+	xmlns:ace="http://www.icefaces.org/icefaces/components"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	style="background-color: #3f90d0">
+<ui:param name="title" value="#{msgs['example.ace.menuBar.title']}" />
+<ui:param name="description"
+	value="#{msgs['example.ace.menuBar.description']}" />
+
+<h:head></h:head>
+
+<h:body>
+
+	<h:form id="formu_roles" prependId="false">
+		<ace:dialog id="dialogRoles" binding="#{dialogRoles}" header="Roles"
+			closable="false" modal="false" draggable="false" showEffect="explode"
+			hideEffect="puff" width="400" visible="#{roles_bean.visible}">
+
+			<!-- CONTENEDOR DE LOS COMPONENTES -->
+			<h:panelGrid id="panel_formuRoles" columns="1"
+				style="margin: 0 auto; text-align: center;">
+				<!-- COMPONENTES DEL FORMULARIO -->
+				<ace:textEntry id="codigo_rol" value="#{roles_bean.rol.codigoRol}"
+					label="Código" labelPosition="top" required="true"
+					requiredIndicator="*">
+				</ace:textEntry>
+				
+				<ace:textEntry id="nombre_rol" value="#{roles_bean.rol.nombreRol}"
+					label="Nombre" labelPosition="top" required="true"
+					requiredIndicator="*"
+					validatorMessage="Nombre: tamaño máximo: 100 caracteres. Mínimo: 3.">
+					<f:validateLength minimum="3" maximum="100" />
+				</ace:textEntry>
+
+			</h:panelGrid>
+
+			<h:panelGrid id="panel_formuBotonesRoles" columns="3"
+				style="margin: 0 auto; text-align: center;">
+				<ace:pushButton id="botonAlta" value="Alta"
+					actionListener="#{roles_bean.alta_Rol}" />
+
+				<ace:pushButton id="botonBaja" value="Baja"
+					actionListener="#{roles_bean.baja_Rol}" />
+
+				<ace:pushButton id="botonModificar" value="Modificación"
+					actionListener="#{roles_bean.modificacion_Rol}" />
+				<ace:pushButton id="botonVolver" value="Volver"
+					onclick="window.history.back();" />
+			</h:panelGrid>
+
+		</ace:dialog>
+	</h:form>
+</h:body>
+
+</html>
